@@ -2,10 +2,11 @@ import { getProject } from "@/sanity/sanity-utils";
 import { PortableText } from "next-sanity";
 
 type Props = {
-  params: { project: string };
+  params: Promise<{ project: string }>;
 };
 
-export default async function Project({ params }: Props) {
+export default async function Project(props: Props) {
+  const params = await props.params;
   const slug = params.project;
   const project = await getProject(slug);
 
