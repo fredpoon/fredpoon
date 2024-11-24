@@ -11,7 +11,7 @@ export default async function Page({ params }: Props) {
   return (
     <div>
       <h1>{page.title}</h1>
-      <div>
+      <div className="prose">
         <PortableText value={page.content} />
       </div>
     </div>

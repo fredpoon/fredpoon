@@ -9,11 +9,27 @@ export async function getProjects(): Promise<Project[]> {
       _id,
       _createdAt, 
       name,
+      description,
       "slug": slug.current,
       "image": image.asset->url,
       url,
       content
     }`
+  );
+}
+
+export async function getProject(slug: string): Promise<Project> {
+  return createClient(clientConfig).fetch(
+    groq`*[_type == 'project' && slug.current == $slug][0]{
+      _id,
+      _createdAt, 
+      name,
+      "slug": slug.current,
+      "image": image.asset->url,
+      url,
+      content
+    }`,
+    { slug }
   );
 }
 
